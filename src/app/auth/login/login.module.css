@@ -1,0 +1,231 @@
+.content_login {
+  background: #161332;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem 2rem;
+
+  .div_login {
+    display: flex;
+    width: 100%;
+    max-width: 960px;
+    height: 680px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      height: auto;
+      max-height: none;
+
+      .login_left {
+        width: 100%;
+        height: 240px;
+        min-width: 0;
+        .container_text {
+          margin-bottom: 1rem;
+        }
+        .quote {
+          font-size: 1.25rem;
+        }
+      }
+
+      .login_rigth {
+        padding: 1.5rem;
+        .form_container {
+          padding: 1rem 0;
+        }
+      }
+    }
+  }
+}
+
+.login_left {
+  width: 40%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url("/images/login.png");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  padding: 2rem;
+  position: relative;
+
+  /* div logo */
+  .div_logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    .logoIcon {
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+  }
+  /* container text */
+  .container_text {
+    margin-bottom: 4rem;
+    .quote {
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .div_author {
+      font-size: 0.875rem;
+      .authorName {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .authorTitle {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+/* rigth login */
+.login_rigth {
+  background-color: white;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .form_container {
+    width: 100%;
+    max-width: 380px;
+    .title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .sub_title {
+      font-size: 0.875rem;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .div_social {
+      display: flex;
+      gap: 1rem;
+      .googleButton {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        background-color: #f9fafb;
+        border: 1px solid #a8a8aa;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: #111827;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-bottom: 1.5rem;
+
+        &:hover {
+          background-color: #dadada;
+        }
+
+        .googleLogo {
+          width: 20px;
+          height: 20px;
+          margin-right: 0.75rem;
+        }
+
+        .signupContainer {
+          text-align: center;
+        }
+      }
+    }
+
+    .divider {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #c5c1c1;
+    }
+
+    .dividerText {
+      padding: 0 1rem;
+      font-size: 0.75rem;
+      color: #8b8b8b;
+    }
+
+    .formField {
+      margin-bottom: 1.25rem;
+      .label {
+        display: block;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+      .input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #b6b6b6;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+      }
+
+      .input:focus {
+        outline: none;
+        border-color: #7346ff;
+        box-shadow: 0 0 0 2px rgba(115, 70, 255, 0.1);
+      }
+    }
+
+    .loginButton {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #7346ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-bottom: 1.5rem;
+      &:hover {
+        background-color: #6234e0;
+      }
+    }
+
+    .signupContainer {
+      text-align: center;
+      .signupText {
+        font-size: 0.8rem;
+        color: #4b5563;
+      }
+
+      .signupLink {
+        font-size: 0.82rem;
+        color: #7346ff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .signupLink:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
