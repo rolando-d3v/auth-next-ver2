@@ -29,29 +29,39 @@
 //   }
 // };
 
-// "use client";
+"use server";
+
+import { signIn } from "@/auth-credenciales/auth";
 // import { signIn } from "next-auth/react";
-// import { loginSchema } from "@/schemas/auth";
+import { loginSchema } from "@/schemas/auth";
 // import { useRouter } from "next/navigation";
-// import * as z from "zod";
+import * as z from "zod";
 
-// export const loginActions = async (values: z.infer<typeof loginSchema>)  => {
-//   const router = useRouter();
-//   const validatedFields = loginSchema.safeParse(values);
-//   if (!validatedFields.success) {
-//     return { error: "Campos inválidos fielsd" };
-//   }
-//   const { email, password } = validatedFields?.data;
-//   const result = await signIn("credentials", {
-//     email,
-//     password,
-//     redirect: false,
-//   });
+export const loginActions = async (values: z.infer<typeof loginSchema>) => {
+  // const router = useRouter();
+  const validatedFields = loginSchema.safeParse(values);
+  if (!validatedFields.success) {
+    return { error: "Campos inválidos field" };
+  }
+  const { email, password } = validatedFields?.data;
 
-//   if (result.ok) {
-//     router.push("/");
-//     router.refresh(); // Fuerza la actualización del estado
-//   } else {
-//     console.error("Error al iniciar sesión:", result.error);
-//   }
-// };
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    return { success: "Inicio de sesión exitoso" };
+    // router.push("/");
+  } catch (error) {
+    console.log(error);
+    return { error: "Error:" + error };
+  }
+
+  // if (result.ok) {
+  //   router.refresh(); // Fuerza la actualización del estado
+  // } else {
+  //   console.error("Error al iniciar sesión:", result.error);
+  // }
+};

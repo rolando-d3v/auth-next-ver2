@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import * as z from "zod";
 import styles from "./login.module.css";
 import Image from "next/image";
+// import { loginActions } from "@/actions/login";
 
 // loginSchema
 
@@ -41,36 +42,36 @@ export default function LoginPage() {
     },
   });
 
+
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
     console.log(values);
-    setError("");
-    setSuccess("");
+    // setError("");
+    // setSuccess("");
 
-    const result = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
+
+    startTransition( async () => {
+      await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      }).then((callback) => {
+        console.log(callback);
+        
+        if (callback?.error) {
+          setError("Error al iniciar sesion");
+          // toast.error(callback.error);
+        }
+
+        if (callback?.ok && !callback?.error) {
+          setSuccess("Logged in successfully");
+          // toast.success("Logged in successfully");
+          // setData({ email: "", password: "", remember: false });
+
+          // SetEmail("");
+          router.push("/");
+        }
+      })
     });
-
-    console.log(result);
-
-    if (result.error !== "CredentialsSignin") {
-      router.push("/");
-      router.refresh(); // Fuerza la actualización del estado
-    }
-
-    if (result.error === "CredentialsSignin") {
-      console.error("Error al iniciar sesión:", result.error);
-      return alert("Credenciales incorrectas");
-    }
-
-    // startTransition(() => {
-    //   loginActions(values).then((data) => {
-    //     console.log(data);
-    //     setError(data?.error);
-    //     setSuccess(data?.success);
-    //   });
-    // });
   };
 
   return (
