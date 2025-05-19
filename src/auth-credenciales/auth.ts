@@ -8,6 +8,7 @@ import Credentials from "next-auth/providers/credentials";
 import { schema } from "./schema";
 import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
+import GitHub from "next-auth/providers/github";
 
 const adapter = PrismaAdapter(prisma);
 
@@ -17,7 +18,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   //   strategy: "database",
   // },
   providers: [
-    Google,
+    Google(
+      // solos si quieres que ingresen con el mismo correo taanto gooogle y githbub
+      { allowDangerousEmailAccountLinking: true }
+    ), GitHub(
+      { allowDangerousEmailAccountLinking: true }
+    ),
     Credentials({
       name: "credentials",
       credentials: {
@@ -52,10 +58,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    // ✅ Borrar sesiones activas ANTES de iniciar una nueva de google o credentials
     async signIn({ user }) {
-      // console.log(user);
-
+      // ✅ Borrar sesiones activas ANTES de iniciar una nueva de google o credentials
       await prisma.session.deleteMany({
         where: {
           userId: user.id,

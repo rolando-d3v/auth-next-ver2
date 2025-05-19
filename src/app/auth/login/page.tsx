@@ -58,15 +58,14 @@ export default function LoginPage() {
         console.log(callback);
         
         if (callback?.error) {
-          setError("Error al iniciar sesion");
+          setError("Error en las credenciales");
           // toast.error(callback.error);
         }
 
         if (callback?.ok && !callback?.error) {
           setSuccess("Logged in successfully");
           // toast.success("Logged in successfully");
-          // setData({ email: "", password: "", remember: false });
-
+     
           // SetEmail("");
           router.push("/");
         }
@@ -122,7 +121,7 @@ export default function LoginPage() {
               <button
                 className={styles.googleButton}
                 type="button"
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("github", { callbackUrl: "/" })}
               >
                 <FaGithub className={styles.googleLogo} />
                 GitHub

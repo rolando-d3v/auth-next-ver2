@@ -3,7 +3,7 @@
 import { registroSchema } from "@/schemas/auth";
 import * as z from "zod";
 import bcrypt from "bcryptjs";
-import {prisma as db} from "@/lib/db";
+import { prisma as db } from "@/lib/db";
 
 export const registerActions = async (
   values: z.infer<typeof registroSchema>
@@ -19,9 +19,12 @@ export const registerActions = async (
   const { email, password, name } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  // transforma el email a minuscula para que no se repita el user
+  const lowerCaseEmail = email.toLowerCase();
+
   const existeMail = await db.user.findUnique({
     where: {
-      email,
+      email: lowerCaseEmail,
     },
   });
   if (existeMail) {
@@ -33,7 +36,7 @@ export const registerActions = async (
   await db.user.create({
     data: {
       name,
-      email,
+      email: lowerCaseEmail,
       password: hashedPassword,
     },
   });
