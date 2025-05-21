@@ -181,20 +181,6 @@ export default function LoginPage() {
               </Link>
             </div>
           </form>
-
-          {/* <div className="flex gap-4 m-4">
-            <button
-              className="w-full  border-2 border-y-violet-300 cursor-pointer "
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-            >
-              <FcGoogle className="inline" />
-              google
-            </button>
-            <button className="w-full  border-2 border-y-violet-300 cursor-pointer ">
-              <FaGithub className="inline" />
-              Github
-            </button>
-          </div> */}
         </section>
       </div>
     </div>
